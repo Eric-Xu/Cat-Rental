@@ -1,0 +1,17 @@
+<h1>update Cat</h1>
+
+  <%= form_for(@cat) do |f| %>
+    <% Owner.all.each do |owner| %>
+      <%= check_box_tag(
+          "cat[owner_ids][]",
+              owner.id,
+              @cat.owner_ids.include?(owner.id),
+              :id => "cat_owner_#{owner.id}" ) %>
+
+      <%= label_tag "cat_owner_#{owner.id}", owner.name %>
+
+    <% end %>
+    <%= hidden_field_tag "cat[owner_ids][]" %>
+
+    <%= f.submit %>
+  <% end %>
